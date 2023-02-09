@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkpnote=self.webpackChunkpnote||[]).push([[4121],{8070:e=>{e.exports=JSON.parse('[{"label":"\u8ba1\u7b97\u673a","permalink":"/docs/tags/\u8ba1\u7b97\u673a","count":4},{"label":"\u7b97\u6cd5","permalink":"/docs/tags/\u7b97\u6cd5","count":5}]')}}]);
