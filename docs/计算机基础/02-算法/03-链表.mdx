@@ -1,0 +1,197 @@
+---
+tags:
+  - 算法
+---
+# 数组
+
+## 一、哈希表
+
+注意一种特殊的哈希表：原地哈希
+
+### [【1】两数之和](https://leetcode-cn.com/problems/two-sum/)
+
+方法：哈希表
+
+题解：官方题解
+
+```java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> hashtable = new HashMap<Integer, Integer>();
+        // 遍历数组 nums
+        for (int i = 0; i < nums.length; ++i) {
+            // 判断是否在哈希表中
+            if (hashtable.containsKey(target - nums[i])) {
+                return new int[]{hashtable.get(target - nums[i]), i};
+            }
+            // 将target - num[i] 放入哈希表
+            hashtable.put(nums[i], i);
+        }
+        return new int[0];
+    }
+}
+```
+
+### [【454】四数相加 II](https://leetcode-cn.com/problems/4sum-ii/)
+
+方法：分组 + 哈希表
+
+思路：
+
+> - 将四个数组分成两组：A 和 B一组， C和D一组。
+> - 二重循环遍历 A 和 B，来构建哈希表：(s,n) ， s = *A*[*i*]+*B*[*j*] ，n 为 s 出现的次数
+> - 二重循环遍历 C 和 D，并判断 -t 是否在哈希表中， t =  *C*[*k*]+*D*[*l*]
+
+拓展：对于n元组 A+B....+N=0 的题目，可考虑上面的分组计算的方法
+
+题解：
+
+```java
+class Solution {
+    public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        Map<Integer, Integer> countAB = new HashMap<Integer, Integer>();
+        for (int u : A) {
+            for (int v : B) {
+                countAB.put(u + v, countAB.getOrDefault(u + v, 0) + 1);
+            }
+        }
+        int ans = 0;
+        for (int u : C) {
+            for (int v : D) {
+                if (countAB.containsKey(-u - v)) {
+                    ans += countAB.get(-u - v);
+                }
+            }
+        }
+        return ans;
+    }
+}
+```
+
+### [【169】 多数元素](https://leetcode-cn.com/problems/majority-element/)
+
+方法：哈希表、排序法、摩尔投票法
+
+思路：直接使用 哈希表计数
+
+题解：
+
+```java
+class Solution {
+
+    public int majorityElement(int[] nums) {
+        // init count map
+        Map<Integer, Integer> countMap = new HashMap<>();
+        for (int num : nums) {
+            Integer count = countMap.get(num);
+            if (count == null) {
+                count = 0;
+            }
+            countMap.put(num, ++count);
+        }
+
+        // find majority element from count map
+        for (Map.Entry<Integer, Integer> entry : countMap.entrySet()) {
+            if (entry.getValue() > nums.length / 2) {
+                return entry.getKey();
+            }
+        }
+        return -1;
+    }
+
+}
+```
+
+### [【448】 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)
+
+方法：原地哈希
+
+思路：可联想到  [【287】 寻找重复数](#[287] 寻找重复数)
+
+题解：
+
+```java
+class Solution {
+
+    /**
+     * 方法一：原地哈希
+     * 因为数字范围为 [1,n] ,并且有重复数字，而且这些重复数字还占了缺失数字的坑，
+     * 所以我们将每个数字放回到正确位置上后，剩下的重复数字所占的位置即为缺失的数字，
+     * 具体做法为：将每个数字 nums[i] 放回到 i-1 的位置处，并将重复数字置为-1，最后-1存在的位置即为缺失的位置
+     *
+     * @param nums nums
+     * @return res
+     */
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        int size = nums.length;
+        for (int i = 0; i < size; i++) {
+            while ((nums[i] - 1) != i && nums[i] != -1) {
+                if (nums[i] == nums[nums[i] - 1]) {
+                    nums[i] = -1;
+                } else {
+                    swap(nums, i, nums[i] - 1);
+                }
+            }
+        }
+
+        List<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            if (nums[i] == -1) {
+                ans.add(i + 1);
+            }
+        }
+
+        return ans;
+
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+}
+
+```
+
+### [【128】 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/)
+
+方法：哈希表
+
+思路：使用哈希表来存储所有值，这样判断某个数是否存在的时间复杂度为O(1)
+
+题解：
+
+```java
+/**
+ * 128. 最长连续序列
+ *
+ * @author r.shi 2021/5/21 17:12
+ */
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> numSet = new HashSet<>();
+        for (int num : nums) {
+            numSet.add(num);
+        }
+
+        int maxLength = 0;
+        for (int num : numSet) {
+            if (numSet.contains(num - 1)) {
+                continue;
+            }
+
+            int tempLength = 0;
+            while (numSet.contains(num)) {
+                tempLength++;
+                num++;
+            }
+
+            maxLength = Math.max(maxLength, tempLength);
+        }
+
+        return maxLength;
+    }
+}
+```

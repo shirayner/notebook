@@ -42,14 +42,14 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/shirayner/notebook/tree/master/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          'https://github.com/shirayner/notebook/tree/master/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -63,6 +63,15 @@ const config = {
     ({
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 5,
+      },
       navbar: {
         title: 'Ray',
         logo: {
@@ -81,6 +90,12 @@ const config = {
             docId: '后端/index',
             position: 'left',
             label: '后端',
+          },
+          {
+            type: 'doc',
+            docId: '前端/index',
+            position: 'left',
+            label: '前端',
           },
           {
             href: 'https://github.com/shirayner',
@@ -137,6 +152,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ["java","sql"],
       },
     }),
 };
