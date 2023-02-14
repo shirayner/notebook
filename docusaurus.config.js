@@ -86,7 +86,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: '计算机基础/index',
+            docId: '计算机基础/README',
             position: 'left',
             label: '计算机基础',
           },
