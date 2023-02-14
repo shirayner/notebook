@@ -111,7 +111,7 @@ const config = {
           {
             href: '/docs/tags',
             position: 'right',
-            label: 'tags',
+            label: 'Tags',
           },
           {
             href: 'https://github.com/shirayner',
