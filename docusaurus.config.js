@@ -1,6 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const simplePlantUML = require("@akebifiky/remark-simple-plantuml");
+
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
@@ -43,6 +45,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
+          remarkPlugins: [simplePlantUML],
           editUrl:
             'https://github.com/shirayner/notebook/tree/master/',
         },
@@ -100,6 +103,17 @@ const config = {
             label: '前端',
           },
           {
+            type: 'doc',
+            docId: 'Markdown/README',
+            position: 'left',
+            label: 'Markdown',
+          },
+          {
+            href: '/docs/tags',
+            position: 'right',
+            label: 'tags',
+          },
+          {
             href: 'https://github.com/shirayner',
             label: 'GitHub',
             position: 'right',
@@ -113,7 +127,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
+                label: '关于',
                 to: '/docs/intro',
               },
             ],
