@@ -92,7 +92,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: '后端/index',
+            docId: 'Backend/index',
             position: 'left',
             label: '后端',
           },
@@ -168,7 +168,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ["java","sql"],
+        additionalLanguages: ["java","sql","properties"],
       },
     }),
 };
