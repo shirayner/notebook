@@ -86,7 +86,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: '计算机基础/README',
+            docId: '计算机基础/资源帖',
             position: 'left',
             label: '计算机基础',
           },
@@ -107,7 +107,7 @@ const config = {
           },
           {
             type: 'doc',
-            docId: '前端/index',
+            docId: 'FrontEnd/index',
             position: 'left',
             label: '前端',
           },

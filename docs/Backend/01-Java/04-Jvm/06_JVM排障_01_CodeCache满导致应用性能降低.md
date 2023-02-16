@@ -1,3 +1,10 @@
+---
+sidebar_label: Code Cache满
+tags:
+  - JVM
+---
+
+
 # Code Cache满导致应用性能降低
 
 

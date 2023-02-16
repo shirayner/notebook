@@ -1,7 +1,7 @@
 ---
 sidebar_label: 性能优化指南
 tags:
-  - jvm
+  - JVM
 ---
 
 # JVM性能优化指南

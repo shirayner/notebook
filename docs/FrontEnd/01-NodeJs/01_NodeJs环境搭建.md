@@ -1,3 +1,9 @@
+---
+sidebar_label: 环境搭建
+tags:
+  - NodeJs
+---
+
 # NodeJs环境搭建
 
 [toc]
