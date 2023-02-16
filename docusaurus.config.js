@@ -91,10 +91,13 @@ const config = {
             label: '计算机基础',
           },
           {
-            type: 'doc',
-            docId: 'Backend/index',
+          
             position: 'left',
             label: '后端',
+            items:[{
+              label:"数据库",
+              to:"docs/category/数据库"
+            }]
           },
           {
             type: 'doc',
