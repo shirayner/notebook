@@ -1,9 +1,10 @@
 ---
+sidebar_label: DDL底层原理
 tags:
   - InnoDB
 ---
 
-# DDL底层原理
+# InnoDB DDL底层原理
 
 [toc]
 

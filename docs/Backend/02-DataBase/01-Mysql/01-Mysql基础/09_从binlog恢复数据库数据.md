@@ -1,4 +1,5 @@
 ---
+sidebar_label: 从binlog恢复数据库数据
 tags:
   - Mysql基础
 ---

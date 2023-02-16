@@ -1,6 +1,7 @@
 ---
+sidebar_label: Explain执行计划详解
 tags:
-  - 查询优化
+  - Mysql查询优化
 ---
 
 # Explain执行计划详解

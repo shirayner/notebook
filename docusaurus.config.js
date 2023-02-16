@@ -54,7 +54,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-          'https://github.com/shirayner/notebook/tree/master/',
+            'https://github.com/shirayner/notebook/tree/master/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -91,13 +91,19 @@ const config = {
             label: '计算机基础',
           },
           {
-          
+
             position: 'left',
             label: '后端',
-            items:[{
-              label:"数据库",
-              to:"docs/category/数据库"
-            }]
+            items: [
+              {
+                label: "Java",
+                to: "docs/category/Java"
+              },
+              {
+                label: "数据库",
+                to: "docs/category/数据库"
+              },
+            ]
           },
           {
             type: 'doc',
@@ -171,7 +177,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ["java","sql","properties"],
+        additionalLanguages: ["java", "sql", "properties"],
       },
     }),
 };

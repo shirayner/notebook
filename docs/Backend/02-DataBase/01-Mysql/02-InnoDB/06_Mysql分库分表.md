@@ -1,4 +1,5 @@
 ---
+sidebar_label: 分库分表
 tags:
   - InnoDB
 ---
