@@ -71,6 +71,7 @@ const config = {
       docs: {
         sidebar: {
           hideable: true,
+          autoCollapseCategories: true,
         },
       },
       tableOfContents: {
@@ -84,12 +85,6 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          {
-            type: 'doc',
-            docId: '计算机基础/资源帖',
-            position: 'left',
-            label: '计算机基础',
-          },
           {
 
             position: 'left',
