@@ -101,6 +101,10 @@ const config = {
             ]
           },
           {
+            label: "操作系统",
+            to: "docs/category/操作系统"
+          },
+          {
             type: 'doc',
             docId: 'FrontEnd/index',
             position: 'left',
