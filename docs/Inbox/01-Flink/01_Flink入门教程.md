@@ -1,5 +1,5 @@
 ---
-sidebar_label: 资源帖
+sidebar_label: Flink 入门教程
 tags:
   - Flink
 ---
@@ -8,6 +8,12 @@ tags:
 # Flink 入门教程
 
 ## 推荐阅读
+
+精选资料：
+
+> - [heibaiying/BigData-Notes](https://github.com/heibaiying/BigData-Notes)
+
+推荐阅读：
 
 > - [基于 DataStream API 实现欺诈检测](https://nightlies.apache.org/flink/flink-docs-release-1.14/zh/docs/try-flink/datastream/)
 > - [不一样的Flink入门教程](https://segmentfault.com/a/1190000038292061)

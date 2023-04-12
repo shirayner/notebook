@@ -12,11 +12,14 @@ const simplePlantUML = require("@akebifiky/remark-simple-plantuml");
 const math = require('remark-math');
 const katex = require('rehype-katex');
 
+const favicon = 'img/logo2.svg';
+const logo = 'img/logo2.svg';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Ray',
   tagline: 'never stop study',
-  favicon: 'img/favicon.ico',
+  favicon: favicon,
 
   // Set the production url of your site here
   url: 'https://shirayner.github.io',
@@ -104,7 +107,7 @@ const config = {
         title: 'Ray',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          src: logo,
         },
         items: [
           {
@@ -137,6 +140,12 @@ const config = {
             docId: 'Markdown/README',
             position: 'left',
             label: 'Markdown',
+          },
+          {
+            type: 'doc',
+            docId: 'Inbox/README',
+            position: 'right',
+            label: 'Inbox',
           },
           {
             href: '/docs/tags',
