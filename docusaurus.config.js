@@ -123,6 +123,10 @@ const config = {
                 label: "数据库",
                 to: "docs/category/数据库"
               },
+              {
+                label: "Git",
+                to: "docs/category/Git"
+              },
             ]
           },
           {
