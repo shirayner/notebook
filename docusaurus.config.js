@@ -141,12 +141,6 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'Markdown/README',
-            position: 'left',
-            label: 'Markdown',
-          },
-          {
-            type: 'doc',
             docId: 'Inbox/README',
             position: 'right',
             label: 'Inbox',
