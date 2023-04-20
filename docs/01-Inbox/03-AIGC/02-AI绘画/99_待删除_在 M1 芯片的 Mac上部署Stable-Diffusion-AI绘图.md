@@ -12,6 +12,7 @@ tags:
 - [如何在mac电脑本地运行stable diffusion做AI绘画](https://zhuanlan.zhihu.com/p/577586684)
 - [如何在你的 M1/M2 Mac 本地运行 Stable Diffusion？](https://sspai.com/post/75682)
 
+
 ## 一、环境准备
 
 ### 1.安装Git
