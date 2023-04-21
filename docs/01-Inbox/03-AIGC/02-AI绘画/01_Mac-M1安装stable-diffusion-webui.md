@@ -96,7 +96,7 @@ v1-5-pruned.ckpt
 
 ### 5. 运行
 
-运行如下命令，即可启动 stable-diffusion
+在`stable-diffusion-webui`目录下，运行如下命令，即可启动 stable-diffusion
 
 ```bash
 ./webui.sh
@@ -104,7 +104,7 @@ v1-5-pruned.ckpt
 
 ![image-20230420022233950](./images/01_Mac-M1安装stable-diffusion-webui/image-20230420022233950.png)
 
-注意，这一步可能会出现如下异常，导致失败：
+注意，这一步可能会出现如下异常，导致失败，可按下面的操作解决异常，然后重新执行`./webui.sh`即可：
 
 > （1）出现关于 HTTP/2  的异常，原因是git 默认使用的通信协议出现问题
 >
@@ -117,6 +117,18 @@ v1-5-pruned.ckpt
 > ```bash
 > git config --global http.version HTTP/1.1
 > ```
+>
+> （2）gfpgan 安装失败
+>
+> 参考：venv/Lib/site-packages
+>
+> 在`stable-diffusion-webui/venv/lib/python3.10/site-packages` 这个目录下，执行 `pip install gfpgan` 即可成功安装 gfpgan 
+>
+> （3） open_clip 安装失败
+>
+> 同 gfpgan ，手动安装即可。 在`stable-diffusion-webui/venv/lib/python3.10/site-packages` 这个目录下，执行 `pip install open_clip_torch`，即可成功安装 open_clip
+
+
 
 ### 6. 打开浏览器
 
