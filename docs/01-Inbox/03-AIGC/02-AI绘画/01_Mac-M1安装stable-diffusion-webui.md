@@ -22,8 +22,6 @@ tags:
 
 ![image-20230421112526384](./images/01_Mac-M1安装stable-diffusion-webui/image-20230421112526384.png)
 
- 
-
 #### 1.2 安装 HomeBrew
 
 参考：
@@ -37,8 +35,6 @@ tags:
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
 ```
 
-
-
 #### 1.3 安装运行环境
 
 执行如下命令，来安装 stable diffusion 运行所需的环境
@@ -48,19 +44,24 @@ brew update
 brew install cmake protobuf rust python@3.10 git wget
 ```
 
-在这一步，如果出现提示 `Warning: No remote 'origin' in /opt/homebrew/Library/Taps/homebrew/homebrew-cask`
+注意：
 
-
-
-```bash
-git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-cask
-git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-core
-git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-services
-```
-
-
-
-
+> 执行 `brew update` 时，可能会出现如下告警：
+>
+> ```java
+> Warning: No remote 'origin' in /opt/homebrew/Library/Taps/homebrew/homebrew-cask, skipping update!
+> Warning: No remote 'origin' in /opt/homebrew/Library/Taps/homebrew/homebrew-core, skipping update!
+> Warning: No remote 'origin' in /opt/homebrew/Library/Taps/homebrew/homebrew-services, skipping update!
+> Already up-to-date.
+> ```
+>
+> 这是因为这些目录不是git认为的安全的目录，需要手动添加这些目录，执行如下命令即可：
+>
+> ```bash
+> git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-cask
+> git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-core
+> git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-services
+> ```
 
 ### 2. 下载stable-diffusion-webui
 
@@ -103,6 +104,20 @@ v1-5-pruned.ckpt
 
 ![image-20230420022233950](./images/01_Mac-M1安装stable-diffusion-webui/image-20230420022233950.png)
 
+注意，这一步可能会出现如下异常，导致失败：
+
+> （1）出现关于 HTTP/2  的异常，原因是git 默认使用的通信协议出现问题
+>
+> ```java
+> HTTP/2 stream 1 was not closed cleanly before end of the underlying stream
+> ```
+>
+> 可以通过将默认通信协议修改为 http/1.1 来解决该问题，执行如下命令即可
+>
+> ```bash
+> git config --global http.version HTTP/1.1
+> ```
+
 ### 6. 打开浏览器
 
 启动成功后，日志中会打印前端页面的访问地址：
@@ -116,4 +131,3 @@ v1-5-pruned.ckpt
 出现下图页面，然后就可以输入提示词进行图片生成了
 
 ![image-20230420024732416](./images/01_Mac-M1安装stable-diffusion-webui/image-20230420024732416.png)
-
