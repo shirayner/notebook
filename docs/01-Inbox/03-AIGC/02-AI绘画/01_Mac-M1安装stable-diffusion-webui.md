@@ -16,33 +16,51 @@ tags:
 
 ### 1. 环境准备
 
-执行如下命令，来安装运行环境
+#### 1.1 安装Git
+
+进入 [git官网](https://git-scm.com/download/mac), 下载并安装最新版本git。
+
+![image-20230421112526384](./images/01_Mac-M1安装stable-diffusion-webui/image-20230421112526384.png)
+
+ 
+
+#### 1.2 安装 HomeBrew
+
+参考：
+
+- [cunkai/HomebrewCN](https://gitee.com/cunkai/HomebrewCN)
+- [Homebrew国内如何自动安装（国内地址）（Mac & Linux）](https://zhuanlan.zhihu.com/p/111014448)
+
+直接执行如下脚本安装 HomeBrew
+
+```bash
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+```
+
+
+
+#### 1.3 安装运行环境
+
+执行如下命令，来安装 stable diffusion 运行所需的环境
 
 ```bash
 brew update
 brew install cmake protobuf rust python@3.10 git wget
 ```
 
-如果提示没有安装 brew， 则执行如下命令安装即可
+在这一步，如果出现提示 `Warning: No remote 'origin' in /opt/homebrew/Library/Taps/homebrew/homebrew-cask`
+
+
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-cask
+git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-core
+git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-services
 ```
 
-如果是第一次安装，或者之前没有设置过国内源，则可以使用如下命令设置为国内源：
 
-```bash
-# 替换brew.git
-cd "$(brew --repo)"
-git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
 
-# 替换homebrew-core.git
-cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
 
-# 刷新源
-brew update
-```
 
 ### 2. 下载stable-diffusion-webui
 
