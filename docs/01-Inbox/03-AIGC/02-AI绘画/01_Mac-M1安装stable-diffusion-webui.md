@@ -16,33 +16,52 @@ tags:
 
 ### 1. 环境准备
 
-执行如下命令，来安装运行环境
+#### 1.1 安装Git
+
+进入 [git官网](https://git-scm.com/download/mac), 下载并安装最新版本git。
+
+![image-20230421112526384](./images/01_Mac-M1安装stable-diffusion-webui/image-20230421112526384.png)
+
+#### 1.2 安装 HomeBrew
+
+参考：
+
+- [cunkai/HomebrewCN](https://gitee.com/cunkai/HomebrewCN)
+- [Homebrew国内如何自动安装（国内地址）（Mac & Linux）](https://zhuanlan.zhihu.com/p/111014448)
+
+直接执行如下脚本安装 HomeBrew
+
+```bash
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+```
+
+#### 1.3 安装运行环境
+
+执行如下命令，来安装 stable diffusion 运行所需的环境
 
 ```bash
 brew update
 brew install cmake protobuf rust python@3.10 git wget
 ```
 
-如果提示没有安装 brew， 则执行如下命令安装即可
+注意：
 
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-如果是第一次安装，或者之前没有设置过国内源，则可以使用如下命令设置为国内源：
-
-```bash
-# 替换brew.git
-cd "$(brew --repo)"
-git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
-
-# 替换homebrew-core.git
-cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
-
-# 刷新源
-brew update
-```
+> 执行 `brew update` 时，可能会出现如下告警：
+>
+> ```java
+> Warning: No remote 'origin' in /opt/homebrew/Library/Taps/homebrew/homebrew-cask, skipping update!
+> Warning: No remote 'origin' in /opt/homebrew/Library/Taps/homebrew/homebrew-core, skipping update!
+> Warning: No remote 'origin' in /opt/homebrew/Library/Taps/homebrew/homebrew-services, skipping update!
+> Already up-to-date.
+> ```
+>
+> 这是因为这些目录不是git认为的安全的目录，需要手动添加这些目录，执行如下命令即可：
+>
+> ```bash
+> git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-cask
+> git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-core
+> git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-services
+> ```
 
 ### 2. 下载stable-diffusion-webui
 
@@ -77,13 +96,39 @@ v1-5-pruned.ckpt
 
 ### 5. 运行
 
-运行如下命令，即可启动 stable-diffusion
+在`stable-diffusion-webui`目录下，运行如下命令，即可启动 stable-diffusion
 
 ```bash
 ./webui.sh
 ```
 
 ![image-20230420022233950](./images/01_Mac-M1安装stable-diffusion-webui/image-20230420022233950.png)
+
+注意，这一步可能会出现如下异常，导致失败，可按下面的操作解决异常，然后重新执行`./webui.sh`即可：
+
+> （1）出现关于 HTTP/2  的异常，原因是git 默认使用的通信协议出现问题
+>
+> ```java
+> HTTP/2 stream 1 was not closed cleanly before end of the underlying stream
+> ```
+>
+> 可以通过将默认通信协议修改为 http/1.1 来解决该问题，执行如下命令即可
+>
+> ```bash
+> git config --global http.version HTTP/1.1
+> ```
+>
+> （2）gfpgan 安装失败
+>
+> 参考：venv/Lib/site-packages
+>
+> 在`stable-diffusion-webui/venv/lib/python3.10/site-packages` 这个目录下，执行 `pip install gfpgan` 即可成功安装 gfpgan 
+>
+> （3） open_clip 安装失败
+>
+> 同 gfpgan ，手动安装即可。 在`stable-diffusion-webui/venv/lib/python3.10/site-packages` 这个目录下，执行 `pip install open_clip_torch`，即可成功安装 open_clip
+
+
 
 ### 6. 打开浏览器
 
@@ -98,4 +143,3 @@ v1-5-pruned.ckpt
 出现下图页面，然后就可以输入提示词进行图片生成了
 
 ![image-20230420024732416](./images/01_Mac-M1安装stable-diffusion-webui/image-20230420024732416.png)
-
