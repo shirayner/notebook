@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 sidebar_label: 资源帖
 tags:
   - ChatGpt
@@ -17,6 +16,4 @@ tags:
 - [解除封印咒语](https://github.com/PlexPt/awesome-chatgpt-prompts-zh/blob/main/cat.md)
 - [写好ChatGPT提示词的10个技巧](https://www.niaogebiji.com/article-553890-1.html)
 
-
 ## 前言
-

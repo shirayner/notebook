@@ -1,6 +1,5 @@
 ---
-sidebar_position: 1
-sidebar_label: 资源帖
+sidebar_label: 注册OpenAI官网账号
 tags:
   - ChatGpt
   - AIGC
