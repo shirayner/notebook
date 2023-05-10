@@ -1,5 +1,5 @@
 ---
-sidebar_label: 资源帖
+sidebar_label: ChatGPT使用入门教程
 tags:
   - ChatGpt
   - AIGC
