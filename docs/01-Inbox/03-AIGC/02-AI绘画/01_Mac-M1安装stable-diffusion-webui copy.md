@@ -18,7 +18,7 @@ tags:
 
 #### 1.1 安装Git
 
-进入 [git官网](https://git-scm.com/download/mac), 下载并安装最新版本git。
+进入 [git官网](https://git-scm.com/download/mac), 下载并安装最新版本git并安装
 
 ![image-20230421112526384](./images/01_Mac-M1安装stable-diffusion-webui/image-20230421112526384.png)
 
@@ -29,7 +29,7 @@ tags:
 - [cunkai/HomebrewCN](https://gitee.com/cunkai/HomebrewCN)
 - [Homebrew国内如何自动安装（国内地址）（Mac & Linux）](https://zhuanlan.zhihu.com/p/111014448)
 
-直接执行如下脚本安装 HomeBrew
+直接执行如下脚本安装 HomeBrew并设置国内镜像软件源
 
 ```bash
 /bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
@@ -62,6 +62,40 @@ brew install cmake protobuf rust python@3.10 git wget
 > git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-core
 > git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-services
 > ```
+
+
+
+#### 1.4 pip 设置国内软件源
+
+pip默认使用的是国外的软件源，下载的时候会很慢，可以设置成国内的软件源来提升下载速度，比如使用清华源。
+
+修改全局配置文件`~/.pip/pip.conf`（如果不存在则创建路径）
+
+```bash
+## 创建pip文件夹
+mkdir ~/.pip
+## 创建并编辑pip.conf文件
+vim ~/.pip/pip.conf
+```
+
+文件内容如下：
+
+```properties
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host = https://pypi.tuna.tsinghua.edu.cn
+```
+
+执行如下命令，可验证是否成功修改软件源：
+
+```bash
+$ pip3 config list   
+global.index-url='https://pypi.tuna.tsinghua.edu.cn/simple'
+install.trusted-host='https://pypi.tuna.tsinghua.edu.cn'
+```
+
+
 
 ### 2. 下载stable-diffusion-webui
 
