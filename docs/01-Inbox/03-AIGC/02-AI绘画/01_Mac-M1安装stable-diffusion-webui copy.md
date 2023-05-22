@@ -63,8 +63,6 @@ brew install cmake protobuf rust python@3.10 git wget
 > git config --global --add safe.directory /opt/homebrew/Library/Taps/homebrew/homebrew-services
 > ```
 
-
-
 #### 1.4 pip 设置国内软件源
 
 pip默认使用的是国外的软件源，下载的时候会很慢，可以设置成国内的软件源来提升下载速度，比如使用清华源。
@@ -94,8 +92,6 @@ $ pip3 config list
 global.index-url='https://pypi.tuna.tsinghua.edu.cn/simple'
 install.trusted-host='https://pypi.tuna.tsinghua.edu.cn'
 ```
-
-
 
 ### 2. 下载stable-diffusion-webui
 
@@ -156,13 +152,11 @@ v1-5-pruned.ckpt
 >
 > 参考：venv/Lib/site-packages
 >
-> 在`stable-diffusion-webui/venv/lib/python3.10/site-packages` 这个目录下，执行 `pip install gfpgan` 即可成功安装 gfpgan 
+> 在`stable-diffusion-webui/venv/lib/python3.10/site-packages` 这个目录下，执行 `pip install gfpgan` 即可成功安装 gfpgan
 >
 > （3） open_clip 安装失败
 >
 > 同 gfpgan ，手动安装即可。 在`stable-diffusion-webui/venv/lib/python3.10/site-packages` 这个目录下，执行 `pip install open_clip_torch`，即可成功安装 open_clip
-
-
 
 ### 6. 打开浏览器
 

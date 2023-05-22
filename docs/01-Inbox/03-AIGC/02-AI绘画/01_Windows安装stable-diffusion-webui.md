@@ -22,8 +22,6 @@ tags:
 > - [官方文档：Install and Run on AMD GPUs](https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-AMD-GPUs)
 > - [官方文档：Install and Run on NVidia GPUs](https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-NVidia-GPUs)
 
-
-
 ## 一、Windows安装stable-diffusion-webui
 
 ### 1. 环境准备
@@ -66,8 +64,6 @@ index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 [install]
 trusted-host = https://pypi.tuna.tsinghua.edu.cn
 ```
-
-
 
 ### 2. 克隆stable-diffusion-webui代码库
 

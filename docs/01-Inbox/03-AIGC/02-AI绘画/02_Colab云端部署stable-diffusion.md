@@ -36,19 +36,11 @@ tags:
 
 ![image-20230522015339605](./images/02_Colab云端部署stable-diffusion/image-20230522015339605.png)
 
-
-
 其中第一步，会需要连接Google硬盘，会提示我们进行授权，点击同意即可。
-
-
 
 （4）所有步骤都完成后，会出现下图中的地址：
 
-
-
 点击后即可进入web-ui的界面。
-
-
 
 ## 二、stable-diffusion-webui-colab 部署流程
 
