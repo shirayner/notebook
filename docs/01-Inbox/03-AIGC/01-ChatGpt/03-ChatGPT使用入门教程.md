@@ -8,7 +8,8 @@ tags:
 
 # ChatGPT使用入门教程
 
-> - [OpenAi官方Prompt课程_吴恩达_ChatGPT Prompt Engineering for Developers](https://learn.deeplearning.ai/chatgpt-prompt-eng/lesson/1/introduction)
+> - [datawhalechina/prompt-engineering-for-developers](https://github.com/datawhalechina/prompt-engineering-for-developers)
+> - [datawhalechina/hugging-llm](https://github.com/datawhalechina/hugging-llm)
 
 ## 推荐阅读
 
