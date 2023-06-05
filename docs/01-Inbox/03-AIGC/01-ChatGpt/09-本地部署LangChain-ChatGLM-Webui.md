@@ -1,10 +1,10 @@
 ---
-sidebar_label: LangChain-ChatGLM-Webui部署
+sidebar_label: 本地部署LangChain-ChatGLM-Webui
 tags:
   - ChatGpt
   - AIGC
 ---
-# LangChain-ChatGLM-Webui部署
+# 本地部署LangChain-ChatGLM-Webui
 
 ## 推荐阅读
 
@@ -16,13 +16,6 @@ tags:
 
 > * [手把手教你本地部署清华大学的ChatGLM-6B模型——Windows+6GB显卡本地部署](https://www.datalearner.com/blog/1051680925189690)
 > * [ChatGLM-6B (介绍相关概念、基础环境搭建及部署](https://juejin.cn/post/7219530344062582842)
-
-> - [THUDM/ChatGLM-6B](https://github.com/THUDM/ChatGLM-6B)
-> - [Akegarasu/ChatGLM-webui](https://github.com/Akegarasu/ChatGLM-webui)
-> - [ChatGLM-6B (介绍相关概念、基础环境搭建及部署)](https://juejin.cn/post/7219530344062582842)
-> - [THUDM/GLM-130B](https://github.com/THUDM/GLM-130B)
-> - [类ChatGPT模型ChatGLM-b6本地部署实践](https://www.modb.pro/db/622680)
-> - 
 
 ## 部署
 
@@ -59,15 +52,9 @@ import torch
 torch.cuda.is_available()  ## 输出应该是True
 ```
 
-
-
 ### 3.下载模型
 
 LLM 模型：
-
-
-
-
 
 ### 4.修改配置
 
@@ -94,7 +81,7 @@ llm_model_dict = {
 }
 ```
 
-修改两个模型的路径，比如我将两个模型分别放到了项目的根目录下的`model/llm`和 `model/embedding` 目录下
+修改两个模型的路径，比如我将两个模型分别放到了项目的根目录下的 `model/llm`和 `model/embedding` 目录下
 
 ![image-20230606022651258](./images/09-本地知识库_LangChain-ChatGLM-Webui部署/image-20230606022651258.png)
 
@@ -120,11 +107,9 @@ llm_model_dict = {
 }
 ```
 
-
-
 #### 4.2 app.py
 
-将server_name由`0.0.0.0` 修改为 `localhost`
+将server_name由 `0.0.0.0` 修改为 `localhost`
 
 原内容：
 
@@ -152,13 +137,12 @@ llm_model_dict = {
 
 ```
 
-
-
 ### 4.启动项目
 
 在项目根目录下执行命令 `python app.py`即可运行项目，启动成功后，会在控制台打印前端界面地址：[http://localhost:7860/](http://localhost:7860/)
 
 ![image-20230606023444601](./images/09-本地知识库_LangChain-ChatGLM-Webui部署/image-20230606023444601.png)
 
+前端界面如下，可以上传自己的知识库文件，支持txt、docx、md、pdf等文本格式文件。
 
-
+![image-20230606024211329](./images/09-本地知识库_LangChain-ChatGLM-Webui部署/image-20230606024211329.png)
