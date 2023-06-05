@@ -4,33 +4,43 @@ tags:
   - ChatGpt
   - AIGC
 ---
-
-
 # 注册OpenAI官网账号
 
 ## 推荐阅读
 
-- [**注册ChatGPT详细指南**](https://sms-activate.org/cn/info/ChatGPT)
 - [ChatGPT常见问题及其解决方法汇总](https://blog.csdn.net/apple_51931783/article/details/130476452#comments_26368615)
 - [ChatGPT怎么用国外手机号注册？解决中国国内无法验证OpenAI账号](https://www.chenweiliang.com/cwl-29546.html)
 - [怎么申请英国虚拟手机号？国内注册免实名英国电话号码](https://www.chenweiliang.com/cwl-28676.html)
 - [ChatGPT 验证手机时出现 Your account was flagged for potential abuse（您的帐户被标记为可能存在滥用行为）的原因和解决方法](https://laowangblog.com/chatgpt-your-account-was-flagged-for-potential-abuse.html)
 - [2023 年好用的接码平台推荐，可接收短信验证码完成验证](https://laowangblog.com/recommended-sms-activate.html)
 - [SMS-Activate 国外接码平台使用教程](https://www.11meigui.com/2023/sms-activate-usage.html)
--
+
+
+## 前言：体验国内免费的ChatGPT
+
+目前国内有一些免费的ChatGPT镜像站点可以用，其内部都是调用OpenAI 的API，所以使用上基本跟官网相同。
+
+这里提供两个
+
+| **项目**                                         | **描述**                                                                |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| [ChatGPT使用指南](http://doc.wuguokai.cn/s/xPq1iNw_v)     | 【开源】【免费使用】wuguokai chatgpt                                          |
+| [pengzhile/pandora](https://github.com/pengzhile/pandora) | 【开源】【共享账号】潘多拉，一个让你呼吸顺畅的ChatGPT。共享账号，在线可用。   |
+| [wetab](https://www.wetab.link/)                          | 【Chrome插件】Chrome新标签页，提供了免费使用ChatGpt的小组件，且内置多种线路。 |
+
 
 ## 一、环境准备
 
 注册OpenAI账号，需要如下材料：
 
 - 代理：[可以访问OpenAI的国家，目前支持156个国家和地区，OpenAI 不支持中国、香港和俄罗斯](https://uzbox.com/ai/not-available-openai.html)。IP需要在这些国家才可以注册。日韩、新加坡、印度尼西亚、美国这些国家都可以。
-- 国外手机号：注册的时候需要填手机号并验证手机号，因此如果没有国外的手机号，则可以使用接码平台。推荐 <https://sms-activate.org/>
+- 国外手机号：注册的时候需要填手机号并验证手机号，因此如果没有国外的手机号，则可以使用接码平台。推荐 [https://sms-activate.org/](https://sms-activate.org/)
 
 ### 1.科学上网
 
 ### 2.国外手机号
 
-前往 <https://sms-activate.org/> ，注册账号
+前往 [https://sms-activate.org/](https://sms-activate.org/) ，注册账号
 
 打开接码平台 [sms-activate.org](https://sms-activate.org/?ref=2068197)，注册一个账号
 
@@ -58,7 +68,7 @@ tags:
 
 ## 二、注册OpenAI账号
 
-打开网址 <https://chat.openai.com/> ，然后使用使用Google账号或邮箱注册都可以，这里使用Google账号登录
+打开网址 [https://chat.openai.com/](https://chat.openai.com/) ，然后使用使用Google账号或邮箱注册都可以，这里使用Google账号登录
 
 ![image-20230512180653420](./images/01-注册OpenAI官网账号/image-20230512180653420.png)
 
@@ -72,7 +82,7 @@ tags:
 
 ![image-20230512181040037](./images/01-注册OpenAI官网账号/image-20230512181040037.png)
 
-去 <https://sms-activate.org> 复制手机号并粘贴过来。
+去 [https://sms-activate.org](https://sms-activate.org) 复制手机号并粘贴过来。
 
 ![image-20230512181110862](./images/01-注册OpenAI官网账号/image-20230512181110862.png)
 
@@ -82,7 +92,7 @@ tags:
 
 ![image-20230512181449701](./images/01-注册OpenAI官网账号/image-20230512181449701.png)
 
-然后去 <https://sms-activate.org> 复制验证码，然后使用这个验证码激活手机号即可。
+然后去 [https://sms-activate.org](https://sms-activate.org) 复制验证码，然后使用这个验证码激活手机号即可。
 
 ![image-20230512181802127](./images/01-注册OpenAI官网账号/image-20230512181802127.png)
 
