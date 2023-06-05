@@ -17,6 +17,10 @@ tags:
 > * [手把手教你本地部署清华大学的ChatGLM-6B模型——Windows+6GB显卡本地部署](https://www.datalearner.com/blog/1051680925189690)
 > * [ChatGLM-6B (介绍相关概念、基础环境搭建及部署](https://juejin.cn/post/7219530344062582842)
 
+云端部署：[colab_PDF_Query_LLM.ipynb](https://colab.research.google.com/drive/1I84-fAAsb3_lRzQB-SDq9xit_0qWk2da)
+
+
+
 ## 部署
 
 ### 1.下载代码并安装依赖
@@ -54,7 +58,13 @@ torch.cuda.is_available()  ## 输出应该是True
 
 ### 3.下载模型
 
-LLM 模型：
+[模型国内下载地址](https://openi.pcl.ac.cn/Learning-Develop-Union/LangChain-ChatGLM-Webui/datasets)
+
+需要下载两个模型：
+
+> * LLM：chatglm-6b-int8.zip
+> * embedding：text2vec-base-chinese
+
 
 ### 4.修改配置
 
@@ -137,7 +147,7 @@ llm_model_dict = {
 
 ```
 
-### 4.启动项目
+### 5.启动项目
 
 在项目根目录下执行命令 `python app.py`即可运行项目，启动成功后，会在控制台打印前端界面地址：[http://localhost:7860/](http://localhost:7860/)
 
@@ -146,3 +156,26 @@ llm_model_dict = {
 前端界面如下，可以上传自己的知识库文件，支持txt、docx、md、pdf等文本格式文件。
 
 ![image-20230606024211329](./images/09-本地知识库_LangChain-ChatGLM-Webui部署/image-20230606024211329.png)
+
+在真正使用的时候可能会遇到如下问题：
+
+(1) PDFInfoNotInstalledError
+
+在上传PDF的时候，可能会出现如下 PDFInfoNotInstalledError 报错：
+
+```
+pdf2image.exceptions.PDFInfoNotInstalledError: Unable to get page count. Is poppler installed and in PATH?
+```
+
+这是因为没有安装 poppler 依赖原因导致的，执行如下命令即可安装依赖，问题得到解决。
+
+```
+conda install -c conda-forge poppler
+```
+
+
+(2) 内存占用触及瓶颈，进程被系统杀掉
+
+![1685992422270](images/09-本地部署LangChain-ChatGLM-Webui/1685992422270.png)
+
+TODO：解决办法待研究
