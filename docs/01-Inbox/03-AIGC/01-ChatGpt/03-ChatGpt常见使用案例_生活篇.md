@@ -1,11 +1,10 @@
 ---
-sidebar_label: ChatGPT高阶玩法
+sidebar_label: 03-ChatGpt常见使用案例_shenghuo篇
 tags:
   - ChatGpt
   - AIGC
 ---
 # ChatGPT常用场景
-
 
 ## 一、专业学习
 
@@ -15,23 +14,13 @@ ChatGPT+发音：
 
 > Chrome安装任一款ChatGpt发音插件即可，比如[Voice Control for ChatGPT](https://chrome.google.com/webstore/detail/voice-control-for-chatgpt/eollffkcakegifhacjnlnegohfdlidhn)
 
-
 ### 2.学编程
-
 
 ## 二、编程
 
 编写程序、解释程序、测试程序
 
-
-
 ## 三、办公生活
-
-
-
-
-
-
 
 ## 一、ChatGPT常用场景
 

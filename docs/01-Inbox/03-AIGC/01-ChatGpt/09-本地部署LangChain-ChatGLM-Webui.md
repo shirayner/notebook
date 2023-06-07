@@ -82,7 +82,6 @@ UnicodeDecodeError: 'gbk' codec can't decode byte 0x80 in position 76: illegal m
 将
 
 ```
-
 def auto_decode(data: bytes) -> str:
     """Check a bytes string for a BOM to correctly detect the encoding
 
@@ -97,7 +96,7 @@ def auto_decode(data: bytes) -> str:
             assert result is not None
             encoding = result.groups()[0].decode("ascii")
             return data.decode(encoding)
-    return data.decode( sys.....)
+    return data.decode(locale.getpreferredencoding(False) or sys.getdefaultencoding(),)
 ```
 
 修改为：
@@ -134,10 +133,6 @@ def auto_decode(data: bytes) -> str:
 https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/
 
 ![image-20230606151145472](./images/09-本地部署LangChain-ChatGLM-Webui/image-20230606151145472.png)
-
-
-
-
 
 ### 2.验证pytorch是否为GPU版本
 
@@ -298,8 +293,6 @@ ModuleNotFoundError: No module named 'duckduckgo_search'
  pip install duckduckgo
 ```
 
-
-
 (5) Could not find a version that satisfies the requirement duckduckgo_search==2.9.5
 
 ```
@@ -308,9 +301,6 @@ ERROR: No matching distribution found for duckduckgo_search==2.9.5
 ```
 
 没有这个版本的依赖，降低依赖即可
-
-
-
 
 (3) 内存占用触及瓶颈，进程被系统杀掉
 
