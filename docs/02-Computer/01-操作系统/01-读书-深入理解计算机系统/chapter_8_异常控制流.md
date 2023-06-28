@@ -1,10 +1,9 @@
 ---
-sidebar_label: 异常控制流
+sidebar_label: 第 8 章：异常控制流
 tags:
   - 操作系统
 ---
-
-# 异常控制流
+# 第 8 章：异常控制流
 
 ## 推荐阅读
 
@@ -14,9 +13,9 @@ tags:
 
 ## 前言
 
-从给处理器加电开始，直到你断电为止，程序计数器假设一个值的序列  a<sub>0</sub>, a<sub>1</sub> , ... , a<sub>n-1</sub> , 其中，每个  a<sub>k</sub> 是某个相应的指令  I<sub>k</sub> 的地址。每次从 a<sub>k</sub> 到 a<sub>k+1</sub> 的过渡称为**控制转移**（control transfer）。这样的控制转移序列叫做处理器的**控制流**（flow of control 或 control flow）。
+从给处理器加电开始，直到你断电为止，程序计数器假设一个值的序列  a`<sub>`0`</sub>`, a`<sub>`1`</sub>` , ... , a`<sub>`n-1`</sub>` , 其中，每个  a`<sub>`k`</sub>` 是某个相应的指令  I`<sub>`k`</sub>` 的地址。每次从 a`<sub>`k`</sub>` 到 a`<sub>`k+1`</sub>` 的过渡称为**控制转移**（control transfer）。这样的控制转移序列叫做处理器的**控制流**（flow of control 或 control flow）。
 
-最简单的一种控制流是一个“平滑的”序列，其中每个  I<sub>k</sub> 和  I<sub>k+1</sub> 在内存中都是相邻的。这种平滑流的突变（也就是 I<sub>k+1</sub> 和  I<sub>k</sub>不相邻）通常是由诸如跳转、调用和返回这样一些熟悉的程序指令造成的。这样一些指令都是必要的机制，使得程序能够对由程序变量表示的内部程序状态中的变化做出反应。
+最简单的一种控制流是一个“平滑的”序列，其中每个  I`<sub>`k`</sub>` 和  I`<sub>`k+1`</sub>` 在内存中都是相邻的。这种平滑流的突变（也就是 I`<sub>`k+1`</sub>` 和  I`<sub>`k`</sub>`不相邻）通常是由诸如跳转、调用和返回这样一些熟悉的程序指令造成的。这样一些指令都是必要的机制，使得程序能够对由程序变量表示的内部程序状态中的变化做出反应。
 
 但是系统也必须能够对系统状态的变化做出反应，这些系统状态不是被内部程序变量捕获的，而且也不一定要和程序的执行相关。比如，一个硬件定时器定期产生信号，这个事件必须得到处理。包到达网络适配器后，必须存放在内存中。程序向磁盘请求数据，然后休眠，直到被通知说数据已就绪。当子进程终止时，创造这些子进程的父进程必须得到通知。
 
@@ -42,12 +41,12 @@ tags:
 
 > 图 8-1 异常的剖析。处理器状态中的变化（事件）触发从应用程序到异常处理程序的突发的控制转移（异常）。在异常处理程序完成处理后，它将控制返回给被中断的程序或者终止
 
-在图中，当处理器状态中发生一个重要的变化时，处理器正在执行某个当前指令 I<sub>curr</sub> 。在处理器中，状态被编码为不同的位和信号。状态变化称为**事件**（event）. 事件可能和当前指令的执行直接相关。比如，发生虚拟内存缺页、算术溢出，或者一条指令试图除以零。另一方面，事件也可能和当前指令的执行没有关系。比如，一个系统定时器产生信号或者一个 I/O 请求完成。
+在图中，当处理器状态中发生一个重要的变化时，处理器正在执行某个当前指令 I`<sub>`curr`</sub>` 。在处理器中，状态被编码为不同的位和信号。状态变化称为**事件**（event）. 事件可能和当前指令的执行直接相关。比如，发生虚拟内存缺页、算术溢出，或者一条指令试图除以零。另一方面，事件也可能和当前指令的执行没有关系。比如，一个系统定时器产生信号或者一个 I/O 请求完成。
 
 在任何情况下，当处理器检测到有事件发生时，它就会通过一张叫做**异常表**（exception table）的跳转表，进行一个间接过程调用（异常），到一个专门设计用来处理这类事件的操作系统子程序（**异常处理程序**（exception handler））.当异常处理程序完成处理后，根据引起异常的事件的类型，会发生以下 3 种情况中的一种：
 
-1. 处理程序将控制返回给当前指令  I<sub>curr</sub> ，即当事件发生时正在执行的指令。
-2. 处理程序将控制返回给  I<sub>next</sub> ，如果没有发生异常将会执行的下一条指令。
+1. 处理程序将控制返回给当前指令  I`<sub>`curr`</sub>` ，即当事件发生时正在执行的指令。
+2. 处理程序将控制返回给  I`<sub>`next`</sub>` ，如果没有发生异常将会执行的下一条指令。
 3. 处理程序终止被中断的程序。
 
 > ### 旁注 - 硬件异常与软件异常
@@ -185,19 +184,19 @@ C 程序用 syscall 函数可以直接调用任何系统调用。然而，实际
 
 例如，考虑大家熟悉的 hello 程序的下面这个版本，用系统级函数 write（见 10.4 节）来写，而不是用 printf：
 
- ```c
+```c
  int main()
  {
      write(1, "hello, world\n", 13);
      _exit(0);
  }
- ```
+```
 
 write 函数的第一个参数将输出发送到 stdout。第二个参数是要写的字节序列，而第三个参数是要写的字节数。
 
 图 8-11 给出的是 hello 程序的汇编语言版本，直接使用 syscall 指令来调用 write 和 exit 系统调用。第 9 ∼ 13 行调用 write 函数。首先，第 9 行将系统调用 write 的编号存放在 ％rax 中，第 10 ∼ 12 行设置参数列表。然后第 13 行使用 syscall 指令来调用系统调用。类似地，第 14 ∼ 16 行调用 _exit 系统调用。
 
-```c title="code/ecf/hello-asm64.sa"
+```c
 .section .data
 string:
   .ascii "hello, world\n"
@@ -266,7 +265,7 @@ main:
 
 ### 3.私有地址空间
 
-进程也为每个程序提供一种假象，好像它独占地使用系统地址空间。在一台 n 位地址的机器上，地址空间是 2<sup>n</sup> 个可能地址的集合，0，1，⋯，2<sup>n</sup>-1 。进程为每个程序提供它自己的**私有地址空间**。一般而言，和这个空间中某个地址相关联的那个内存字节是不能被其他进程读或者写的，从这个意义上说，这个地址空间是私有的。
+进程也为每个程序提供一种假象，好像它独占地使用系统地址空间。在一台 n 位地址的机器上，地址空间是 2`<sup>`n`</sup>` 个可能地址的集合，0，1，⋯，2`<sup>`n`</sup>`-1 。进程为每个程序提供它自己的**私有地址空间**。一般而言，和这个空间中某个地址相关联的那个内存字节是不能被其他进程读或者写的，从这个意义上说，这个地址空间是私有的。
 
 尽管和每个私有地址空间相关联的内存的内容一般是不同的，但是每个这样的空间都有相同的通用结构。比如，图 8-13 展示了一个 x86-64 Linux 进程的地址空间的组织结构。
 
@@ -335,12 +334,12 @@ main:
 
 当 Unix 系统级函数遇到错误时，它们通常会返回 -1，并设置全局整数变量 errno 来表示什么出错了。程序员应该总是检査错误，但是不幸的是，许多人都忽略了错误检查，因为它使代码变得臃肿，而且难以读懂。比如，下面是我们调用 Unix fork 函数时会如何检査错误：
 
- ```c
+```c
  if ((pid = fork()) < 0) {
      fprintf(stderr, "fork error: %s\n", strerror(errno));
      exit(0);
  }
- ```
+```
 
 strerror 函数返回一个文本串，描述了和某个 errno 值相关联的错误。通过定义下面的错误报告函数，我们能够在某种程度上简化这个代码：
 
@@ -361,7 +360,7 @@ if ((pid = fork()) < 0)
 
 通过使用错误处理包装函数，我们可以更进一步地简化代码，Stevens 在【110】中首先提出了这种方法。对于一个给定的基本函数 foo，我们定义一个具有相同参数的包装函数 Foo，但是第一个字母大写了。包装函数调用基本函数，检査错误，如果有任何问题就终止。比如，下面是 fork 函数的错误处理包装函数：
 
- ```c
+```c
  pid_t Fork(void)
  {
      pid_t pid;
@@ -370,7 +369,7 @@ if ((pid = fork()) < 0)
          unix_error("Fork error");
      return pid;
  }
- ```
+```
 
 给定这个包装函数，我们对 fork 的调用就缩减为 1 行：
 
@@ -390,7 +389,7 @@ Unix 提供了大量从 C 程序中操作进程的系统调用。这一节将描
 
 每个进程都有一个唯一的正数（非零）进程 ID（PID）。getpid 函数返回调用进程的 PID。getppid 函数返回它的父进程的 PID（创建调用进程的进程）。
 
- ```c
+```c
  #include <sys/types.h>
  #include <unistd.h>
  
@@ -398,7 +397,7 @@ Unix 提供了大量从 C 程序中操作进程的系统调用。这一节将描
  pid_t getppid(void);
  
  // 返回：调用者或其父进程的 PID。
- ```
+```
 
 getpid 和 getppid 函数返回一个类型为 pid_t 的整数值，在 Linux 系统上它在 types.h 中被定义为 int。
 
@@ -413,13 +412,13 @@ getpid 和 getppid 函数返回一个类型为 pid_t 的整数值，在 Linux �
   - 2）从主程序返回；
   - 3）调用 exit 函数。
 
- ```c
+```c
  #include <stdlib.h>
  
  void exit(int status);
  
  // 该函数不返回。
- ```
+```
 
 exit 函数以 status 退出状态来终止进程（另一种设置退出状态的方法是从主程序中返回一个整数值）。
 
@@ -440,7 +439,7 @@ fork 函数是有趣的（也常常令人迷惑），因为它**只被调用一�
 
 图 8-15 展示了一个使用 fork 创建子进程的父进程的示例。当 fork 调用在第 6 行返回时，在父进程和子进程中 x 的值都为 1。子进程在第 8 行加一并输出它的 x 的副本。相似地，父进程在第 13 行减一并输出它的 x 的副本。
 
-```c title="code/ecf/fork.c"
+```c
 int main()
 {
     pid_t pid;
@@ -451,7 +450,7 @@ int main()
         printf("child : x=%d\n", ++x);
         exit(0);
     }
-    
+  
     /* Parent */
     printf("parent: x=%d\n", --x);
     exit(0);
@@ -668,7 +667,7 @@ void unsetenv(const char *name);
 
 图 8-23 展示了一个简单 shell 的 main 例程。shell 打印一个命令行提示符，等待用户在 stdin 上 输入命令行，然后对这个命令行求值。
 
-```c title='code/ecf/shellex.c'
+```c
 #include "csapp.h"
 #define MAXARGS 128
 
@@ -698,7 +697,7 @@ int main()
 
 图 8-24 展示了对命令行求值的代码。它的首要任务是调用 parseline 函数（见图 8-25），这个函数解析了以空格分隔的命令行参数，并构造最终会传递给 execve 的 argv 向量。第一个参数被假设为要么是一个内置的 shell 命令名，马上就会解释这个命令，要么是一个可执行目标文件，会在一个新的子进程的上下文中加载并运行这个文件。
 
-```c title='code/ecf/shellex.c'
+```c
 /* eval - Evaluate a command line */
 void eval(char *cmdline)
 {
@@ -745,7 +744,7 @@ int builtin_command(char **argv)
 
 > 图 8-24 eval 对 shell 命令行求值
 
-```c title='code/ecf/shellex.c'
+```c
 /* parseline - Parse the command line and build the argv array */
 int parseline(char *buf, char **argv)
 {
@@ -797,45 +796,45 @@ int parseline(char *buf, char **argv)
 
 每种信号类型都对应于某种系统事件。**低层的硬件异常是由内核异常处理程序处理的，正常情况下，对用户进程而言是不可见的。信号提供了一种机制，通知用户进程发生了这些异常**。比如，如果一个进程试图除以 0，那么内核就发送给它一个 SIGFPE 信号（号码 8）。如果一个进程执行一条非法指令，那么内核就发送给它一个 SIGILL 信号（号码 4）。如果进程进行非法内存引用，内核就发送给它一个 SIGSEGV 信号（号码 11）。其他信号对应于内核或者其他用户进程中较高层的软件事件。比如，如果当进程在前台运行时，你键入 Ctrl+C（也就是同时按下 Ctrl 键和 C 键），那么内核就会发送一个 SIGINT 信号（号码 2）给这个前台进程组中的每个进程。一个进程可以通过向另一个进程发送一个 SIGKILL 信号（号码 9）强制终止它。当一个子进程终止或者停止时，内核会发送一个 SIGCHLD 信号（号码 17）给父进程。
 
-| 序号 | 名称      | 默认行为                          | 相应事件                       |
-| ---- | --------- | --------------------------------- | ------------------------------ |
-| 1    | SIGHUP    | 终止                              | 终端线挂断                     |
-| 2    | SIGINT    | 终止                              | 来自键盘的中断                 |
-| 3    | SIGQUIT   | 终止                              | 来自键盘的退出                 |
-| 4    | SIGILL    | 终止                              | 非法指令                       |
-| 5    | SIGTRAP   | 终止并转储内存<sup>①</sup>        | 跟踪陷阱                       |
-| 6    | SIGABRT   | 终止并转储内存<sup>①</sup>        | 来自 abort 函数的终止信号      |
-| 7    | SIGBUS    | 终止                              | 总线错误                       |
-| 8    | SIGFPE    | 终止并转储内存<sup>①</sup>        | 浮点异常                       |
-| 9    | SIGKILL   | 终止<sup>②</sup>                  | 杀死程序                       |
-| 10   | SIGUSR1   | 终止                              | 用户定义的信号 1               |
-| 11   | SIGSEGV   | 终止并转储内存<sup>①</sup>        | 无效的内存引用（段故障）       |
-| 12   | SIGUSR2   | 终止                              | 用户定义的信号 2               |
-| 13   | SIGPIPE   | 终止                              | 向一个没有读用户的管道做写操作 |
-| 14   | SIGALRM   | 终止                              | 来自 alarm 函数的定时器信号    |
-| 15   | SIGTERM   | 终止                              | 软件终止信号                   |
-| 16   | SIGSTKFLT | 终止                              | 协处理器上的栈故障             |
-| 17   | SIGCHLD   | 忽略                              | 一个子进程停止或者终止         |
-| 18   | SIGCONT   | 忽略                              | 继续进程如果该进程停止         |
-| 19   | SIGSTOP   | 停止直到下一个SIGCONT<sup>②</sup> | 不是来自终端的停止信号         |
-| 20   | SIGTSTP   | 停止直到下一个SIGCONT             | 来自终端的停止信号             |
-| 21   | SIGTTIN   | 停止直到下一个SIGCONT             | 后台进程从终端读               |
-| 22   | SIGTTOU   | 停止直到下一个SIGCONT             | 后台进程向终端写               |
-| 23   | SIGURG    | 忽略                              | 套接字上的紧急情况             |
-| 24   | SIGXCPU   | 终止                              | CPU 时间限制超出               |
-| 25   | SIGXFSZ   | 终止                              | 文件大小限制超出               |
-| 26   | SIGVTALRM | 终止                              | 虚拟定时器期满                 |
-| 27   | SIGPROF   | 终止                              | 剖析定时器期满                 |
-| 28   | SIGWINCH  | 忽略                              | 窗口大小变化                   |
-| 29   | SIGIO     | 终止                              | 在某个描述符上可执行 I/O 操作  |
-| 30   | SIGPWR    | 终止                              | 电源故障                       |
+| 序号 | 名称      | 默认行为                                   | 相应事件                       |
+| ---- | --------- | ------------------------------------------ | ------------------------------ |
+| 1    | SIGHUP    | 终止                                       | 终端线挂断                     |
+| 2    | SIGINT    | 终止                                       | 来自键盘的中断                 |
+| 3    | SIGQUIT   | 终止                                       | 来自键盘的退出                 |
+| 4    | SIGILL    | 终止                                       | 非法指令                       |
+| 5    | SIGTRAP   | 终止并转储内存`<sup>`①`</sup>`        | 跟踪陷阱                       |
+| 6    | SIGABRT   | 终止并转储内存`<sup>`①`</sup>`        | 来自 abort 函数的终止信号      |
+| 7    | SIGBUS    | 终止                                       | 总线错误                       |
+| 8    | SIGFPE    | 终止并转储内存`<sup>`①`</sup>`        | 浮点异常                       |
+| 9    | SIGKILL   | 终止`<sup>`②`</sup>`                  | 杀死程序                       |
+| 10   | SIGUSR1   | 终止                                       | 用户定义的信号 1               |
+| 11   | SIGSEGV   | 终止并转储内存`<sup>`①`</sup>`        | 无效的内存引用（段故障）       |
+| 12   | SIGUSR2   | 终止                                       | 用户定义的信号 2               |
+| 13   | SIGPIPE   | 终止                                       | 向一个没有读用户的管道做写操作 |
+| 14   | SIGALRM   | 终止                                       | 来自 alarm 函数的定时器信号    |
+| 15   | SIGTERM   | 终止                                       | 软件终止信号                   |
+| 16   | SIGSTKFLT | 终止                                       | 协处理器上的栈故障             |
+| 17   | SIGCHLD   | 忽略                                       | 一个子进程停止或者终止         |
+| 18   | SIGCONT   | 忽略                                       | 继续进程如果该进程停止         |
+| 19   | SIGSTOP   | 停止直到下一个SIGCONT`<sup>`②`</sup>` | 不是来自终端的停止信号         |
+| 20   | SIGTSTP   | 停止直到下一个SIGCONT                      | 来自终端的停止信号             |
+| 21   | SIGTTIN   | 停止直到下一个SIGCONT                      | 后台进程从终端读               |
+| 22   | SIGTTOU   | 停止直到下一个SIGCONT                      | 后台进程向终端写               |
+| 23   | SIGURG    | 忽略                                       | 套接字上的紧急情况             |
+| 24   | SIGXCPU   | 终止                                       | CPU 时间限制超出               |
+| 25   | SIGXFSZ   | 终止                                       | 文件大小限制超出               |
+| 26   | SIGVTALRM | 终止                                       | 虚拟定时器期满                 |
+| 27   | SIGPROF   | 终止                                       | 剖析定时器期满                 |
+| 28   | SIGWINCH  | 忽略                                       | 窗口大小变化                   |
+| 29   | SIGIO     | 终止                                       | 在某个描述符上可执行 I/O 操作  |
+| 30   | SIGPWR    | 终止                                       | 电源故障                       |
 
 > 图 8-26 Linux 信号
 
->- ① 多年前，主存是用一种称为磁芯存储器（core memory）的技术来实现的。“转储内存”（dumping core）是一个历史术语，意思是把代码和数据内存段的映像写到磁盘上。
->- ② 这个信号既不能被捕获，也不能被忽略。
+> - ① 多年前，主存是用一种称为磁芯存储器（core memory）的技术来实现的。“转储内存”（dumping core）是一个历史术语，意思是把代码和数据内存段的映像写到磁盘上。
+> - ② 这个信号既不能被捕获，也不能被忽略。
 >
->（来源：man 7 signal。数据来自 Linux Foundation。）
+> （来源：man 7 signal。数据来自 Linux Foundation。）
 
 ### 1. 信号术语
 
@@ -873,12 +872,12 @@ pid_t getpgrp(void);
 
 默认地，一个子进程和它的父进程同属于一个进程组。一个进程可以通过使用 setpgid 函数来改变自己或者其他进程的进程组：
 
- ```c
+```c
  #include <unistd.h>
  int setpgid(pid_t pid, pid_t pgid);
  
  // 返回：若成功则为o，若错误则为 -1。
- ```
+```
 
 setpgid 函数将进程 pid 的进程组改为 pgid。如果 pid 是 0，那么就使用当前进程的 PID。如果 pgid 是 0，那么就用 pid 指定的进程的 PID 作为进程组 ID。例如，如果进程 15213 是调用进程，那么
 
@@ -935,7 +934,7 @@ int kill(pid_t pid, int sig);
 
 如果 pid 大于零，那么 kill 函数发送信号号码 sig 给进程 pid。如果 pid 等于零，那么 kill 发送信号 sig 给调用进程所在进程组中的每个进程，包括调用进程自己。如果 pid 小于零，kill 发送信号 sig 给进程组 |pid|（pid 的绝对值）中的每个进程。图 8-29 展示了一个示例，父进程用 kill 函数发送 SIGKILL 信号给它的子进程。
 
-```c title='code/ecf/kill.c'
+```c
 #include "csapp.h"
 
 int main()
@@ -972,7 +971,7 @@ alarm 函数安排内核在 secs 秒后发送一个 SIGALRM 信号给调用进�
 
 ### 3. 接收信号
 
-当内核把进程 p 从内核模式切换到用户模式时（例如，从系统调用返回或是完成了一次上下文切换），它会检查进程 p 的未被阻塞的待处理信号的集合（pending &~blocked）。如果这个集合为空（通常情况下），那么内核将控制传递到 p 的逻辑控制流中的下一条指令（ I<sub>next</sub> ）。然而，如果集合是非空的，那么内核选择集合中的某个信号 k （通常是最小的 k），并且强制 p 接收信号 k。收到这个信号会触发进程采取某种行为。一旦进程完成了这个行为，那么控制就传递回 p 的逻辑控制流中的下一条指令（ I<sub>next</sub> ）。每个信号类型都有一个预定义的**默认行为**，是下面中的一种：
+当内核把进程 p 从内核模式切换到用户模式时（例如，从系统调用返回或是完成了一次上下文切换），它会检查进程 p 的未被阻塞的待处理信号的集合（pending &~blocked）。如果这个集合为空（通常情况下），那么内核将控制传递到 p 的逻辑控制流中的下一条指令（ I`<sub>`next`</sub>` ）。然而，如果集合是非空的，那么内核选择集合中的某个信号 k （通常是最小的 k），并且强制 p 接收信号 k。收到这个信号会触发进程采取某种行为。一旦进程完成了这个行为，那么控制就传递回 p 的逻辑控制流中的下一条指令（ I`<sub>`next`</sub>` ）。每个信号类型都有一个预定义的**默认行为**，是下面中的一种：
 
 - 进程终止。
 - 进程终止并转储内存。
@@ -1002,7 +1001,7 @@ signal 函数可以通过下列三种方法之一来改变和信号 signum 相�
 
 图 8-30 展示了一个程序，它捕获用户在键盘上输入 Ctrl+C 时发送的 SIGINT 信号。SIGINT 的默认行为是立即终止该进程。在这个示例中，我们将默认行为修改为捕获信号，输出一条消息，然后终止该进程。
 
-```c title='code/ecf/sigint.c'
+```c
 #include "csapp.h"
 
 void sigint_handler(int sig) /* SIGINT handler */
@@ -1155,7 +1154,7 @@ sio_putl 和 sio_puts 函数分别向标准输出传送一个 long 类型数和�
 
 图 8-34 给出的是 SIO 包的实现，它使用了 csapp.c 中两个私有的可重入函数。第 3 行的 sio_strlen 函数返回字符串 s 的长度。第 10 行的 sio_ltoa 函数基于来自【61】的 itoa 函数，把 v 转换成它的基 b 字符串表示，保存在 s 中。第 17 行的 _exit 函数是 exit 的一个异步信号安全的变种。
 
-```c title='code/src/csapp.c'
+```c
 ssize_t sio_puts(char s[]) /* Put string */
 {
     return write(STDOUT_FILENO, s, sio_strlen(s));
@@ -1180,7 +1179,7 @@ void sio_error(char s[]) /* Put error message and exit */
 
 图 8-35 给出了图 8-30 中 SIGINT 处理程序的一个安全的版本。
 
-```c title='code/ecf/sigintsafe.c'
+```c
 #include "csapp.h"
 
 void sigint_handler(int sig) /* Safe SIGINT handler */
@@ -1193,9 +1192,7 @@ void sigint_handler(int sig) /* Safe SIGINT handler */
 > 图 8-35 图 8-30 的 SIGINT 处理程序的一个安全版本
 
 - **G2. 保存和恢复 errno。**许多 Linux 异步信号安全的函数都会在出错返回时设置 errno。在处理程序中调用这样的函数可能会干扰主程序中其他依赖于 errno 的部分。解决方法是在进入处理程序时把 errno 保存在一个局部变量中，在处理程序返回前恢复它。注意，只有在处理程序要返回时才有此必要。如果处理程序调用 _exit 终止该进程，那么就不需要这样做了。
-
 - **G3. 阻塞所有的信号，保护对共享全局数据结构的访问。**如果处理程序和主程序或其他处理程序共享一个全局数据结构，那么在访问（读或者写）该数据结构时，你的处理程序和主程序应该暂时阻塞所有的信号。这条规则的原因是从主程序访问一个数据结构 d 通常需要一系列的指令，如果指令序列被访问次的处理程序中断，那么处理程序可能会发现 d 的状态不一致，得到不可预知的结果。在访问 d 时暂时阻塞信号保证了处理程序不会中断该指令序列。
-
 - **G4. 用 volatile 声明全局变量。**考虑一个处理程序和一个 main 函数，它们共享一个全局变量 g。处理程序更新 g，main 周期性地读 g。对于一个优化编译器而言，main 中 g 的值看上去从来没有变化过，因此使用缓存在寄存器中 g 的副本来满足对 g 的每次引用是很安全的。如果这样，main 函数可能永远都无法看到处理程序更新过的值。
 
   可以用 volatile 类型限定符来定义一个变量，告诉编译器不要缓存这个变量。例如：
@@ -1203,7 +1200,6 @@ void sigint_handler(int sig) /* Safe SIGINT handler */
   **`volatile int g;`**
 
   volatile 限定符强迫编译器每次在代码中引用 g 时，都要从内存中读取 g 的值。一般来说，和其他所有共享数据结构一样，应该暂时阻塞信号，保护每次对全局变量的访问。
-
 - **G5. 用 sig_atomic_t 声明标志。在常见的处理程序设计中，处理程序会写全局标志**来记录收到了信号。主程序周期性地读这个标志，响应信号，再清除该标志。对于通过这种方式来共享的标志，C 提供一种整型数据类型 sig_atomic_t，对它的读和写保证会是原子的（不可中断的），因为可以用一条指令来实现它们：
 
   **`volatile sig_atomic_t flag;`**
@@ -1220,7 +1216,7 @@ void sigint_handler(int sig) /* Safe SIGINT handler */
 
 图 8-36 展示了我们的初次尝试。父进程设置了一个 SIGCHLD 处理程序，然后创建了 3 个子进程。同时，父进程等待来自终端的一个输入行，随后处理它。这个处理被模型化为一个无限循环。当每个子进程终止时，内核通过发送一个 SIGCHLD 信号通知父进程。父进程捕获这个 SIGCHLD 信号，回收一个子进程，做一些其他的清理工作（模型化为 sleep 语句），然后返回。
 
-```c title='code/ecf/signal.c'
+```c
 /* WARNING: This code is buggy! */
 
 void handler1(int sig)
@@ -1296,7 +1292,7 @@ linux> ps t
 
 为了修正这个问题，我们必须回想一下，存在一个待处理的信号只是暗示自进程最后一次收到一个信号以来，至少已经有一个这种类型的信号被发送了。所以我们必须修改 SIGCHLD 的处理程序，使得每次 SIGCHLD 处理程序被调用时，回收尽可能多的僵死子进程。图 8-37 展示了修改后的 SIGCHLD 处理程序。
 
-```c title='code/ecf/signal2.c'
+```c
 void handler2(int sig)
 {
     int olderrno = errno;
@@ -1346,7 +1342,7 @@ int sigaction(int signum, struct sigaction *act,
 
 sigaction 函数运用并不广泛，因为它要求用户设置一个复杂结构的条目。一个更简洁的方式，最初是由 W. Richard Stevens 提出的【110】，就是定义一个包装函数，称为 Signal，它调用 sigaction。图 8-38 给出了 Signal 的定义，它的调用方式与 signal 函数的调用方式一样。
 
-```c tiltle='code/src/csapp.c'
+```c
 handler_t *Signal(int signum, handler_t *handler)
 {
     struct sigaction action, old_action;
@@ -1354,7 +1350,7 @@ handler_t *Signal(int signum, handler_t *handler)
     action.sa_handler = handler;
     sigemptyset(&action.sa_mask); /* Block sigs of type being handled */
     action.sa_flags = SA_RESTART; /* Restart syscalls if possible */
-    
+  
     if (sigaction(signum, &action, &old_action) < 0)
         unix_error("Signal error");
     return (old_action.sa_handler);
@@ -1378,7 +1374,7 @@ Signal 包装函数设置了一个信号处理程序，其信号处理语义如�
 
 并发编程是一个很深且很重要的问题，我们将在第 12 章中更详细地讨论。不过，在本章中学习的有关异常控制流的知识，可以让你感觉一下与并发相关的有趣的智力挑战。例如，考虑图 8-39 中的程序，它总结了一个典型的 Unixshell 的结构。父进程在一个全局作业列表中记录着它的当前子进程，每个作业一个条目。addjob 和 deletejob 函数分别向这个作业列表添加和从中删除作业。
 
-```c title='code/ecf/procmask1.c'
+```c
 /* WARNING: This code is buggy! */
 void handler(int sig)
 {
@@ -1436,7 +1432,7 @@ int main(int argc, char **argv)
 
 图 8-40 展示了消除图 8-39 中竞争的一种方法。通过在调用 fork 之前，阻塞 SIGCHLD 信号，然后在调用 addjob 之后取消阻塞这些信号，我们保证了在子进程被添加到作业列表中之后回收该子进程。注意，子进程继承了它们父进程的被阻塞集合，所以我们必须在调用 execve 之前，小心地解除子进程中阻塞的 SIGCHLD 信号。
 
-```c title='code/ecf/procmask2.c'
+```c
 void handler(int sig)
 {
     int olderrno = errno;
@@ -1464,7 +1460,7 @@ int main(int argc, char **argv)
     Sigaddset(&mask_one, SIGCHLD);
     Signal(SIGCHLD, handler);
     initjobs(); /* Initialize the job list */
-    
+  
     while (1) {
         Sigprocmask(SIG_BLOCK, &mask_one, &prev_one); /* Block SIGCHLD */
         if ((pid = Fork()) == 0) { /* Child process */
@@ -1487,7 +1483,7 @@ int main(int argc, char **argv)
 
 图 8-41 给出了一个基本的思路。父进程设置 SIGINT 和 SIGCHLD 的处理程序，然后进入一个无限循环。它阻塞 SIGCHLD 信号，避免 8.5.6 节中讨论过的父进程和子进程之间的竞争。创建了子进程之后，把 pid 重置为 0，取消阻塞 SIGCHLD，然后以循环的方式等待 pid 变为非零。子进程终止后，处理程序回收它，把它非零的 PID 赋值给全局 pid 变量。这会终止循环，父进程继续其他的工作，然后开始下一次迭代。
 
-```c title='code/ecf/waitforsignal.c'
+```c
 #include "csapp.h"
 
 volatile sig_atomic_t pid;
@@ -1576,7 +1572,7 @@ sigprocmask(SIG_SETMASK, &prev, NULL);
 
 图 8-42 展示了如何使用 sigsuspend 来替代图 8-41 中的循环。在每次调用 sigsuspend 之前，都要阻塞 SIGCHLD。sigsuspend 会暂时取消阻塞 SIGCHLD，然后休眠，直到父进程捕获信号。在返回之前，它会恢复原始的阻塞集合，又再次阻塞 SIGCHLD。如果父进程捕获一个 SIGINT 信号，那么循环测试成功，下一次迭代又再次调用 sigsuspend。如果父进程捕获一个 SIGCHLD，那么循环测试失败，会退出循环。此时，SIGCHLD 是被阻塞的，所以我们可以可选地取消阻塞 SIGCHLDO 在真实的有后台作业需要回收的 shell 中这样做可能会有用处。
 
-```c title='code/ecf/sigsuspend.c'
+```c
 #include "csapp.h"
 
 volatile sig_atomic_t pid;
@@ -1662,7 +1658,7 @@ longjmp 函数从 env 缓冲区中恢复调用环境，然后触发一个从最�
 
 图 8-43 展示了一个示例，说明这可能是如何工作的。main 函数首先调用 setjmp 以保存当前的调用环境，然后调用函数 foo，foo 依次调用函数 bar。如果 foo 或者 bar 遇到一个错误，它们立即通过一次 longjmp 调用从 setjmp 返回。setjmp 的非零返回值指明了错误类型，随后可以被解码，且在代码中的某个位置进行处理。
 
-```c title='code/ecf/setjmp.c'
+```c
 #include "csapp.h"
 
 jmp_buf buf;
@@ -1711,7 +1707,7 @@ longjmp 允许它跳过所有中间调用的特性可能产生意外的后果。
 
 非本地跳转的另一个重要应用是使一个信号处理程序分支到一个特殊的代码位置，而不是返回到被信号到达中断了的指令的位置。图 8-44 展示了一个简单的程序，说明了这种基本技术。当用户在键盘上键入 Ctrl+C 时，这个程序用信号和非本地跳转来实现软重启。sigsetjmp 和 siglongjmp 函数是 setjmp 和 longjmp 的可以被信号处理程序使用的版本。
 
-```c title='code/ecf/restart.c'
+```c
 #include "csapp.h"
 
 sigjmp_buf buf;
